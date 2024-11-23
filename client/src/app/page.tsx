@@ -2,14 +2,16 @@
 'use client'
 
 import { Header } from '@/components/Header'
+import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { withQueryClient } from '@/HOCs/withQueryClient'
 import { useFetchCountries } from '@/hooks/useFetchCountries'
 import { List } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 const Home: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('')
   const { data: countries, isLoading, error } = useFetchCountries()
   const router = useRouter()
 
@@ -17,6 +19,10 @@ const Home: React.FC = () => {
 
   if (isLoading) return null
   if (error) return null
+
+  const filteredCountries = countries?.filter((country) =>
+    country.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
   return (
     <div className="w-full p-6">
@@ -26,6 +32,13 @@ const Home: React.FC = () => {
           <List size={24} strokeWidth={1.6} />
           <h2 className="text-xl capitalize text-neutral-400">available countries</h2>
         </div>
+        <Input
+          type="text"
+          placeholder="Search by country name"
+          value={searchTerm}
+          onChange={({ target }) => setSearchTerm(target.value)}
+          className="rounded-md border p-6"
+        />
         <div className="overflow-hidden rounded-md border shadow-lg">
           <Table className="min-w-full divide-y">
             <TableHeader>
@@ -42,7 +55,7 @@ const Home: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody className="divide-y">
-              {countries?.map(({ name, countryCode }, index) => (
+              {filteredCountries?.map(({ name, countryCode }, index) => (
                 <TableRow
                   key={`${countryCode}-${index}`}
                   className="cursor-pointer"
