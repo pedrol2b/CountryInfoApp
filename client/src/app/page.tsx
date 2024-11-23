@@ -5,9 +5,15 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { withQueryClient } from "@/HOCs/withQueryClient";
 import { useFetchCountries } from "@/hooks/useFetchCountries";
+import { useRouter } from "next/navigation";
 
 function Home() {
   const { data: countries, isLoading, error } = useFetchCountries();
+  const router = useRouter();
+
+  const handleCountryClick = (countryCode: string) => {
+    router.push(`/country/${countryCode}`);
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading countries</div>;
@@ -22,7 +28,12 @@ function Home() {
         <div className="pb-6 px-6 flex flex-col space-y-2">
           {countries?.map(({ name, countryCode }, index) => (
             <div key={`${countryCode}-${index}`}>
-              <Button variant="ghost">{name}</Button>
+              <Button
+                variant="ghost"
+                onClick={() => handleCountryClick(countryCode)}
+              >
+                {name}
+              </Button>
             </div>
           ))}
         </div>
