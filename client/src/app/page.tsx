@@ -11,9 +11,10 @@ import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
 
 const Home: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const { data: countries, isLoading, error } = useFetchCountries()
   const router = useRouter()
+  const { data: countries, isLoading, error } = useFetchCountries()
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleNavigateToCountry = useCallback((countryCode: string) => router.push(`/country/${countryCode}`), [router])
 
