@@ -26,6 +26,17 @@ type CountriesFlagImagesResponse = {
   }>
 }
 
+// type CountryFlagResponse = {
+//   error: boolean
+//   msg: string
+//   data: {
+//     name: string
+//     flag: string
+//     iso2: string
+//     iso3: string
+//   }
+// }
+
 class CountriesNow {
   static defaultTimeout = 15000
 
@@ -58,6 +69,18 @@ class CountriesNow {
       throw error
     }
   }
+
+  // NOTE: Docs don`t seen to be updated and the example request with cURL is not working
+  // https://documenter.getpostman.com/view/1134062/T1LJjU52#d5fa7209-3bf9-4a24-be50-94d84192b1a6
+  // async getCountryFlag(iso2: string): Promise<CountryFlagResponse> {
+  //   try {
+  //     const response = await this.client.post<CountryFlagResponse>('/countries/flag', { iso2 })
+  //     return response.data
+  //   } catch (error) {
+  //     console.error(error)
+  //     throw error
+  //   }
+  // }
 }
 
 export { CountriesNow }
