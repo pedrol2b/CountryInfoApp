@@ -4,8 +4,9 @@
 import { withQueryClient } from "@/HOCs/withQueryClient";
 import { useFetchCountryInfo } from "@/hooks/useFetchCountryInfo";
 import { useParams } from "next/navigation";
+import React from "react";
 
-function CountryDetails() {
+const CountryInfo: React.FC = () => {
   const params = useParams();
   const countryCode = params.countryCode;
 
@@ -24,6 +25,6 @@ function CountryDetails() {
       <p>Country Code: {country.countryCode}</p>
     </div>
   );
-}
+};
 
-export default withQueryClient(CountryDetails);
+export default withQueryClient(CountryInfo);
