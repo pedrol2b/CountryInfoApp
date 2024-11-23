@@ -1,9 +1,9 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      NEXT_PUBLIC_BASEURL?: string;
+      NEXT_PUBLIC_BASEURL?: string
     }
   }
 }
 
-export {};
+export {}

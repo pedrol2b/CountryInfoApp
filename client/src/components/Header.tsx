@@ -1,19 +1,16 @@
-import { ModeToggle } from "@/components/ModeToggle";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { ModeToggle } from '@/components/ModeToggle'
+import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
 
 const Header: React.FC = () => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const handleNavigateToRoot = useCallback(() => router.push("/"), [router]);
+  const handleNavigateToRoot = useCallback(() => router.push('/'), [router])
 
   return (
-    <div className="flex flex-row justify-between items-center">
+    <div className="flex flex-row items-center justify-between">
       <div className="flex flex-row items-center gap-x-4">
-        <h1
-          onClick={handleNavigateToRoot}
-          className="text-2xl font-medium cursor-pointer text-neutral-400"
-        >
+        <h1 onClick={handleNavigateToRoot} className="cursor-pointer text-2xl font-medium text-neutral-400">
           Country Info App
         </h1>
       </div>
@@ -21,7 +18,7 @@ const Header: React.FC = () => {
         <ModeToggle />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { Header };
+export { Header }
