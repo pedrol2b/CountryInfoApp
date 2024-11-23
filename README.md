@@ -2,6 +2,9 @@
 
 A Full-Stack JavaScript engineer test assessment.
 
+![Demo 1](/assets/demo-1.png)
+![Demo 2](/assets/demo-2.png)
+
 ## Overview
 
 This project provides a full-stack application built with modern JavaScript frameworks and tools. It consists of:
