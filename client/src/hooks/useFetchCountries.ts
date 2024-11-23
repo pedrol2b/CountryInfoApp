@@ -5,8 +5,12 @@ import { useQuery } from "react-query";
 
 const api = API.getInstance().getAPIClient();
 
+type AvailableCountriesResponse = Array<{ countryCode: string; name: string }>;
+
 const fetchCountries = async () => {
-  const { data } = await api.get("/api/available-countries");
+  const { data } = await api.get<AvailableCountriesResponse>(
+    "/api/available-countries"
+  );
   return data;
 };
 

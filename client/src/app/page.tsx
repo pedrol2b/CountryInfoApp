@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { withQueryClient } from "@/app/HOCs/withQueryClient";
-import { useFetchCountries } from "@/app/hooks/useFetchCountries";
+import { ModeToggle } from "@/components/ModeToggle";
+import { Button } from "@/components/ui/button";
+import { withQueryClient } from "@/HOCs/withQueryClient";
+import { useFetchCountries } from "@/hooks/useFetchCountries";
 
 function Home() {
   const { data: countries, isLoading, error } = useFetchCountries();
@@ -11,11 +13,21 @@ function Home() {
   if (error) return <div>Error loading countries</div>;
 
   return (
-    <div>
-      {countries?.map((country: any) => (
-        <div key={country.code}>{country.name}</div>
-      ))}
-    </div>
+    <>
+      <div className="fixed p-4 right-0">
+        <ModeToggle />
+      </div>
+      <div className="p-6 text-2xl font-bold">Available Countries</div>
+      <div className="flex-1 flex justify-start">
+        <div className="pb-6 px-6 flex flex-col space-y-2">
+          {countries?.map(({ name, countryCode }, index) => (
+            <div key={`${countryCode}-${index}`}>
+              <Button variant="ghost">{name}</Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
