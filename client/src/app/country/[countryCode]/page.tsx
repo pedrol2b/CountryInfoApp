@@ -14,10 +14,23 @@ import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { withQueryClient } from '@/HOCs/withQueryClient'
 import { useFetchCountryInfo } from '@/hooks/useFetchCountryInfo'
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js'
 import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
+import { Line } from 'react-chartjs-2'
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 const CountryInfo: React.FC = () => {
   const router = useRouter()
@@ -30,6 +43,18 @@ const CountryInfo: React.FC = () => {
   const { data: country, isLoading, error } = useFetchCountryInfo(countryCode as string)
 
   const handleNavigateToCountry = useCallback((countryCode: string) => router.push(`/country/${countryCode}`), [router])
+
+  const populationData = {
+    labels: country?.population.map((data: any) => data.year),
+    datasets: [
+      {
+        label: 'Population',
+        data: country?.population.map((data: any) => data.value),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      },
+    ],
+  }
 
   // TODO: create a component for error and loading
   /**
@@ -111,6 +136,10 @@ const CountryInfo: React.FC = () => {
               ))}
             </TableBody>
           </Table>
+        </div>
+        <div className="mt-10">
+          <h2 className="text-xl text-neutral-400">Population Over Time</h2>
+          <Line data={populationData} />
         </div>
       </div>
     </div>
