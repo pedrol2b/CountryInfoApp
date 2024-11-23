@@ -17,6 +17,11 @@ const Home: React.FC = () => {
 
   const handleNavigateToCountry = useCallback((countryCode: string) => router.push(`/country/${countryCode}`), [router])
 
+  // TODO: create a component for error and loading
+  /**
+   * There's no time for creating error/loading component, sorry
+   * https://imgur.com/EIltHmR
+   */
   if (isLoading) return null
   if (error) return null
 

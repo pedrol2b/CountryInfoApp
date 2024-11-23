@@ -12,8 +12,13 @@ const CountryInfo: React.FC = () => {
 
   const { data: country, isLoading, error } = useFetchCountryInfo(countryCode as string)
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error loading country details</div>
+  // TODO: create a component for error and loading
+  /**
+   * There's no time for creating error/loading component, sorry
+   * https://imgur.com/EIltHmR
+   */
+  if (isLoading) return null
+  if (error) return null
 
   return (
     <div>
