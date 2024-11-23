@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./",
+    "moduleResolution": "node10",
+    "baseUrl": ".",
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "removeComments": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "typeRoots": ["./node_modules/@types"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", ".eslintrc.js"],
+  "exclude": ["node_modules", "dist"]
+}
