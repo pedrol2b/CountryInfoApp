@@ -30,8 +30,28 @@ class CountryController {
         return
       }
 
-      const countryInfo = await this.dateNager.getCountryInfo(countryCode)
-      res.send(countryInfo)
+      const { borders, commonName: countryName } = await this.dateNager.getCountryInfo(countryCode)
+
+      const populationPromise = this.countriesNow.getCountriesPopulation()
+      const flagImagesPromise = this.countriesNow.getCountriesFlagImages()
+
+      // HACK: added a note in `countriesNow` explaining this,
+      // the POST request that should be used to get the country information is not working, at least not in the postman example
+      const [populationData, flagImagesData] = await Promise.all([populationPromise, flagImagesPromise])
+
+      const population = populationData.data.find(
+        (country: { country: string }) => country.country.toLowerCase() === countryName.toLowerCase(),
+      )
+
+      const flagImage = flagImagesData.data.find((country: { iso2: string }) => country.iso2 === countryCode)
+      const flag = flagImage ? flagImage.flag : null
+
+      res.send({
+        countryName,
+        flag,
+        borders,
+        population: population?.populationCounts ?? [],
+      })
     } catch (error) {
       next(error)
     }
