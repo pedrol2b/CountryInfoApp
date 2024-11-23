@@ -2,6 +2,14 @@
 'use client'
 
 import { Header } from '@/components/Header'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { withQueryClient } from '@/HOCs/withQueryClient'
@@ -39,6 +47,19 @@ const CountryInfo: React.FC = () => {
   return (
     <div className="w-full p-6">
       <Header />
+      <div className="mt-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{country.countryName}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       <div className="mt-10 flex flex-col gap-y-6 p-8">
         <div className="flex flex-col items-center justify-center gap-y-4">
           <div className="relative h-36 w-36 overflow-hidden rounded-md border">
